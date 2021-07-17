@@ -18,11 +18,9 @@ const createPlayers = (id,name,gameId)=>{
 const findPlayer = (id) => players.find(player => player.id === id) 
 
 const deletePlayer = (id)=>{
-  console.log(players)
   const removePlaer = players.filter(player => player.id !== id);
   players= removePlaer;
 
-  console.log(players)
 }
 
 module.exports = {

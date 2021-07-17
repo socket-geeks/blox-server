@@ -63,19 +63,18 @@ io.on('connection', (socket) => {
 
   socket.on('adding', ({ blocks, id, gameId }) => {
     const game = findGame(gameId);
-    console.log(game);
     game.blocks = blocks;
-
     const newTurn = game.turn === game.player1 ? game.player2 : game.player1;
-
     game.turn = newTurn;
-
-    console.log(game)
     updateGame(game);
-    io.in(gameId).emit('upGame',game)
-  });
+    io.in(gameId).emit('upGame', game);
 
-  
+    socket.on('winner', ({ winner }) => {
+      game.winner = winner.id;
+      updateGame(game);
+      socket.emit('winnerIs', game);
+    });
+  });
 });
 server.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}`);
