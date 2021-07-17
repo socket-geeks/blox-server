@@ -79,3 +79,7 @@ io.on('connection', (socket) => {
 server.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}`);
 });
+
+app.get('/',(req,res)=>{
+  res.send('Home SERVER Route')
+})
